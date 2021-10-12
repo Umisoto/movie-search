@@ -2,14 +2,14 @@ import React, { useState } from "react";
 
 const Search = props => {
   const [searchTitle, setSearchTitle] = useState("");
-  const [genre, setGenre]=useState("");
+  const [genre, setGenre] = useState("");
 
   const handleSearchInputChanges = e => {
     setSearchTitle(e.target.value);
   };
-  const handleSelectGenre=e=>{
+  const handleSelectGenre = e => {
     setGenre(e.target.value);
-  }
+  };
   const handleClickSearchFunction = e => {
     e.preventDefault();
     props.search(searchTitle, genre);

@@ -13,7 +13,7 @@ const MOVIE_API_URL = "http://www.omdbapi.com/?s=game&apikey=f1929b89";
 const App = () => {
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const [lists, setLists]=useState([]);
+  const [lists, setLists] = useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchName, setSearchName] = useState("");
   const [count, setCount] = useState(0);
@@ -55,22 +55,22 @@ const App = () => {
         }
       });
 
-      // if(genre==="movie"){
-      //   const temp=movies.filter(movie=>{
-      //     return movie.Type===genre
-      //   })
-      //   setLists(temp);
-      // } else if(genre==="series"){
-      //     setLists(movies.filter(movie=>{
-      //       return movie.Type===genre
-      //     }))
-      // } else {
-      //     setLists(movies)
-      // }
-      // 1回分時差がある理由は？
-      // console.log(movies);
-      // console.log("list")
-      // console.log(lists);
+    // if(genre==="movie"){
+    //   const temp=movies.filter(movie=>{
+    //     return movie.Type===genre
+    //   })
+    //   setLists(temp);
+    // } else if(genre==="series"){
+    //     setLists(movies.filter(movie=>{
+    //       return movie.Type===genre
+    //     }))
+    // } else {
+    //     setLists(movies)
+    // }
+    // 1回分時差がある理由は？
+    // console.log(movies);
+    // console.log("list")
+    // console.log(lists);
   };
 
   return (
