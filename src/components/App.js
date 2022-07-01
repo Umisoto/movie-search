@@ -4,45 +4,27 @@ import Search from "./Search";
 import Movie from "./Movie";
 import "../stylesheet.css";
 
-// const MOVIE_API_URL = "https://www.omdbapi.com/?s=man&apikey=4a3b711b";
-// sはキーワードを意味する
 // const MOVIE_API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=f1929b89";
 // iはimdbIDを意味する
 const MOVIE_API_URL = "http://www.omdbapi.com/?s=game&apikey=f1929b89";
+// sはキーワードを意味する
 
 const App = () => {
+  const initialSearchResult={
+    title: "",
+    genre: "",
+    year: ""
+  }
   const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const [lists, setLists]=useState([]);
   const [errorMessage, setErrorMessage] = useState(null);
-  const [searchName, setSearchName] = useState("");
+  const [searchResult, setSearchResult] = useState(initialSearchResult);
+  const [fetchURL, setFetchURL]=useState(MOVIE_API_URL)
   const [count, setCount] = useState(0);
   const [hitsAmount, setHitsAmount] = useState(0);
 
-  // 初回レンダリング
   useEffect(() => {
-    // エラーメッセージが出た際に、更新ボタンを押した時用のエラーメッセージの初期化
-    setErrorMessage(null);
-
-    fetch(MOVIE_API_URL)
-      // 1つ目のthenは{}で括って複数行にはできず、必ず1行にしなければならない
-      .then(response => response.json())
-      .then(jsonResponse => {
-        setMovies(jsonResponse.Search);
-        // setLists(jsonResponse.Search);
-        setLoading(false);
-      });
-  }, []);
-
-  const search = (searchTitle, genre) => {
-    // エラーメッセージが出た後に検索した時用のエラーメッセージの初期化
-    setErrorMessage(null);
-    // result表示用仕込み
-    setCount(count + 1);
-    setSearchName(searchTitle);
-
-    setLoading(true);
-    fetch(`http://www.omdbapi.com/?s=${searchTitle}&apikey=f1929b89`)
+    fetch(fetchURL)
       .then(response => response.json())
       .then(jsonResponse => {
         setHitsAmount(jsonResponse.totalResults);
@@ -54,40 +36,51 @@ const App = () => {
           setLoading(false);
         }
       });
+  }, [fetchURL]);
 
-      // if(genre==="movie"){
-      //   const temp=movies.filter(movie=>{
-      //     return movie.Type===genre
-      //   })
-      //   setLists(temp);
-      // } else if(genre==="series"){
-      //     setLists(movies.filter(movie=>{
-      //       return movie.Type===genre
-      //     }))
-      // } else {
-      //     setLists(movies)
-      // }
-      // 1回分時差がある理由は？
-      // console.log(movies);
-      // console.log("list")
-      // console.log(lists);
+  const search = (title, genre, year) => {
+    // エラーメッセージが出た後に検索した時用のエラーメッセージの初期化
+    setErrorMessage(null);
+    // result表示用仕込み
+    setCount(count + 1);
+    setSearchResult({title, genre, year});
+    setLoading(true);
+
+    if(year && genre){
+      setFetchURL(`http://www.omdbapi.com/?s=${title}&type=${genre}&y=${year}&apikey=f1929b89`)
+    } else if(genre){
+      setFetchURL(`http://www.omdbapi.com/?s=${title}&type=${genre}&apikey=f1929b89`)
+    } else if(year){
+      setFetchURL(`http://www.omdbapi.com/?s=${title}&y=${year}&apikey=f1929b89`)
+    } else{
+      setFetchURL(`http://www.omdbapi.com/?s=${title}&apikey=f1929b89`)
+    }
   };
 
   return (
-    <div className="App">
+    <div>
       <Header text="Movie Search" />
-      <Search search={search} />
+      <Search search={search} primaryPlaceholder="ex). game" />
 
       <div>
         {loading && !errorMessage ? (
-          <p>loading...</p>
+          <div className="proceeding-message">
+              <p>Loading...</p>
+          </div>
         ) : errorMessage ? (
-          <p>{errorMessage}</p>
+          <div className="proceeding-message">
+            <p>{errorMessage}</p>
+          </div>
         ) : (
           <div className="movies">
             {count > 0 && (
+              // 初回レンダリング時はcountを0にしているため非表示
               <div className="result">
-                <p>Search Title: "{searchName}" </p>
+                <div>
+                <p className="result-message" >Search Title: "{searchResult.title}", </p>
+                <p className="result-message" >Genre: "{searchResult.genre}", </p>
+                <p className="result-message" >Year: "{searchResult.year}" </p>
+                </div>
                 <p>Hits: {hitsAmount}</p>
                 <div className="items-amount">
                   {hitsAmount <= 10 ? (
@@ -99,10 +92,11 @@ const App = () => {
               </div>
             )}
 
-            {/* {lists.map((movie, index) => { */}
-            {movies.map((movie, index) => {
-              return <Movie movie={movie} key={`${index}-${movie.Title}`} />;
-            })}
+            <div className="movies-container">
+              {movies.map((movie, index) => {
+                return <Movie movie={movie} key={`${index}-${movie.Title}`} />;
+              })}
+            </div>
           </div>
         )}
       </div>
