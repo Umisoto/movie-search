@@ -10,11 +10,13 @@ const Movie = ({ movie }) => {
 
   return (
     <div className="single-movie-container">
-      <h3>{movie.Title}</h3>
-      <div className="image">
-        <img src={poster} alt={`The movie titled: ${movie.Title}`} />
+      <div className="title-block">
+        <h3 className="movie-title">{movie.Title}</h3>
       </div>
-      <p>{movie.Year}</p>
+      <div className="image">
+        <img src={poster} alt={`The movie title: ${movie.Title}`} />
+      </div>
+      <p className="year">{movie.Year}</p>
     </div>
   );
 };
