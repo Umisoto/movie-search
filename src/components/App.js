@@ -4,9 +4,9 @@ import Search from "./Search";
 import Movie from "./Movie";
 import "../stylesheet.css";
 
-// const MOVIE_API_URL = "http://www.omdbapi.com/?i=tt3896198&apikey=f1929b89";
+// const MOVIE_API_URL = "https://www.omdbapi.com/?i=tt3896198&apikey=f1929b89";
 // iはimdbIDを意味する
-const MOVIE_API_URL = "http://www.omdbapi.com/?s=game&apikey=f1929b89";
+const MOVIE_API_URL = "https://www.omdbapi.com/?s=game&apikey=f1929b89";
 // sはキーワードを意味する
 
 const App = () => {
@@ -47,13 +47,13 @@ const App = () => {
     setLoading(true);
 
     if(year && genre){
-      setFetchURL(`http://www.omdbapi.com/?s=${title}&type=${genre}&y=${year}&apikey=f1929b89`)
+      setFetchURL(`https://www.omdbapi.com/?s=${title}&type=${genre}&y=${year}&apikey=f1929b89`)
     } else if(genre){
-      setFetchURL(`http://www.omdbapi.com/?s=${title}&type=${genre}&apikey=f1929b89`)
+      setFetchURL(`https://www.omdbapi.com/?s=${title}&type=${genre}&apikey=f1929b89`)
     } else if(year){
-      setFetchURL(`http://www.omdbapi.com/?s=${title}&y=${year}&apikey=f1929b89`)
+      setFetchURL(`https://www.omdbapi.com/?s=${title}&y=${year}&apikey=f1929b89`)
     } else{
-      setFetchURL(`http://www.omdbapi.com/?s=${title}&apikey=f1929b89`)
+      setFetchURL(`https://www.omdbapi.com/?s=${title}&apikey=f1929b89`)
     }
   };
 

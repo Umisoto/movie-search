@@ -11,6 +11,8 @@
 
 ## `URL`
 
+https://movies-series-search.herokuapp.com/
+
 ## `アプリ作成の意図`
 
 外部APIの利用方法を学習するために作成しました。
