@@ -18,7 +18,7 @@
     "eject": "react-scripts eject",
     "postinstall": "gulp browserify",
     "start": "react-scripts start",
-    "test": "react-scripts test",
+    "test": "react-scripts test"
   },
   "eslintConfig": {
     "extends": [
