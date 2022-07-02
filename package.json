@@ -15,11 +15,11 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
+    "start": "node index.js",
     "build": "react-scripts build",
+    "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "gulp browserify",
-    "start": "node server/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "postinstall": "gulp browserify"
   },
   "engines": {
     "node": "14.x",
