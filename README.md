@@ -13,7 +13,7 @@
 
 ## `URL`
 
-https://movies-series-search.herokuapp.com/
+(https://movies-series-search.herokuapp.com/){:target="_blank"}
 
 ## `アプリ作成の意図`
 
