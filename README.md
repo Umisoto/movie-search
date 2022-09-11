@@ -43,11 +43,13 @@ $ npm install
 ```
 
 package.jsonの  
-"scripts": {
-    "start": "node index.js",
+"scripts": {  
+&emsp;"start": "node index.js",  
 },  
 を  
-"start": "react-scripts start"
+"scripts": {  
+&emsp;"start": "react-scripts start",  
+},  
 に変更
 
 ```bash
