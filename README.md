@@ -42,14 +42,18 @@ $ cd movie-search
 $ npm install
 ```
 
-package.jsonの  
+package.jsonの
+```
 "scripts": {  
-&emsp;"start": "node index.js",  
+  "start": "node index.js",  
 },  
+```
 を  
+```
 "scripts": {  
-&emsp;"start": "react-scripts start",  
-},  
+  "start": "react-scripts start",  
+}, 
+``` 
 に変更
 
 ```bash
